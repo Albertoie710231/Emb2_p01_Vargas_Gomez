@@ -4,12 +4,12 @@ En esta práctica se realizaron las siguientes funciones que son parte de la API
 
 - rtos_start_scheduler
   Se añadió la inicialización del global tick, current task y y el sysTick de la tarjeta según lo necesario, 
-  se carga el tick del sistema y por ultimo se añadió la función para crear una IDLE Task.{
+  se carga el tick del sistema y por último se añadió la función para crear una IDLE Task.
   
 - rtos_create_task
   Primero se verifica si hay espacio disponible para crear la tarea, después se verifica si fue solicitada su 
-  creación con un autostart o no, si lo fue se procede a la inicialización de todos los elementos de la estructura 
-  task_list, y se pone la tarea en un estado de ready. De lo contrario se pone en un estado de suspendido.
+  creación con un autostart o no, si lo fue se pone el estado de la tarea del task_list en ready. De lo contrario 
+  se pone en un estado de suspendido.
 
 - rtos_get_clock
   Devuelve el valor del Systick.
@@ -57,5 +57,5 @@ En esta práctica se realizaron las siguientes funciones que son parte de la API
   Finalmente consideramos que esta práctica ha hecho que comprendamos de mejor manera el funcionamiento de este miniRTOS.
   Las consideraciones que hay que tener al implementarlo pero más que nada entender cada paso de la secuencia del SO. 
   
-  Alberto Vargas Garrido IE710231
-  Emiliano Gómez Guerrero IE708504
+    - Alberto Vargas Garrido IE710231
+    - Emiliano Gómez Guerrero IE708504
