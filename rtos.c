@@ -104,6 +104,17 @@ void rtos_start_scheduler(void)
 	for (;;);
 }
 
+/**
+ * @brief En esta funcion se crean nuvas tareas. Dependiedo de si
+ * queremos que empiezen inmediatamente o no, se pondran en el
+ * estado correspondiente.
+ *
+ * @param task_body
+ * @param priority
+ * @param autostart
+ * @retval Se regresa el indice de la nueva tarea en la lista de tareas
+ */
+
 rtos_task_handle_t rtos_create_task(void (*task_body)(), uint8_t priority,
 		rtos_autostart_e autostart)
 {
@@ -174,6 +185,14 @@ static void reload_systick(void)
 	SysTick->VAL = 0;
 }
 
+/**
+ * @brief En esta funcion se determina cual va ser la siguiente
+ * tarea dependiendo de la prioridad de la tarea.
+ *
+ * @param Se especifica si se cambia desde tarea normal o ISR
+ * @retval void
+ */
+
 static void dispatcher(task_switch_type_e type)
 {
 	int8_t highestPriority = -1;
@@ -197,6 +216,14 @@ static void dispatcher(task_switch_type_e type)
 	}
 
 }
+
+/**
+ * @brief En esta funcion se hace el cambio de contexto. Guarda el offset
+ * del stack porinter dependiendo de donde venga el contexto.
+ *
+ * @param Se especifica si se cambia desde tarea normal o ISR
+ * @retval none
+ */
 
 FORCE_INLINE static void context_switch(task_switch_type_e type)
 {
@@ -222,6 +249,13 @@ FORCE_INLINE static void context_switch(task_switch_type_e type)
 	SCB->ICSR |= SCB_ICSR_PENDSVSET_Msk; // Set PendSV to pending
 	context_switch_first = 1;
 }
+
+/*!
+ * @brief En esta funcion se activan tareas que estan en espera.
+ *
+ * @param void
+ * @retval void
+ */
 
 static void activate_waiting_tasks(void)
 {
